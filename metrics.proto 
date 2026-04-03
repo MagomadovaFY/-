@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package metrics;
+
+// Сервис для сбора метрик
+service MetricsCollector {
+    // Client streaming RPC: клиент отправляет поток метрик
+    rpc CollectMetrics(stream Metric) returns (CollectMetricsResponse) {}
+}
+
+// Сообщение метрики
+message Metric {
+    string name = 1;        // Название метрики
+    double value = 2;       // Значение метрики
+    int64 timestamp = 3;    // Время в Unix timestamp
+    string source = 4;      // Источник
+}
+
+// Ответ сервера после сбора метрик
+message CollectMetricsResponse {
+    string message = 1;     // Сообщение о результате
+    int32 total_metrics = 2; // Количество полученных метрик
+    string status = 3;       // "OK" или "ERROR"
+}

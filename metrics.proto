@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package metrics;
+
+service MetricsCollector {
+    rpc CollectMetrics(stream Metric) returns (CollectMetricsResponse) {}
+}
+
+message Metric {
+    string name = 1;
+    double value = 2;
+    int64 timestamp = 3;
+    string source = 4;
+}
+
+message CollectMetricsResponse {
+    string message = 1;
+    int32 total_metrics = 2;
+    string status = 3;
+}

@@ -96,22 +96,39 @@ if __name__ == '__main__':
 
 ### Листинг metrics.proto
 syntax = "proto3";
-
 package metrics;
-
 service MetricsCollector {
     rpc CollectMetrics(stream Metric) returns (CollectMetricsResponse) {}
 }
-
 message Metric {
     string name = 1;
     double value = 2;
     int64 timestamp = 3;
     string source = 4;
 }
-
 message CollectMetricsResponse {
     string message = 1;
     int32 total_metrics = 2;
     string status = 3;
 }
+
+# Выводы
+В ходе работы был реализован gRPC-сервис для сбора метрик с использованием client streaming RPC. Сервер успешно принял и обработал 10 метрик, клиент получил подтверждение. Освоены навыки работы с Protocol Buffers, генерации кода и реализации gRPC-взаимодействия на Python.
+
+
+---
+
+## 📁 Структура репозитория
+grpc_metrics_lab/
+├── README.md
+├── metrics.proto
+├── server.py
+├── client.py
+├── metrics_pb2.py
+├── metrics_pb2_grpc.py
+├── venv/
+└── screenshots/
+├── server.png
+├── client.png
+├── proto.png
+└── code.png

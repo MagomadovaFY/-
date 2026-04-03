@@ -21,9 +21,7 @@ import grpc
 from concurrent import futures
 import metrics_pb2
 import metrics_pb2_grpc
-
-class MetricsCollectorServicer(metrics_pb2_grpc.MetricsCollectorServicer):
-    
+class MetricsCollectorServicer(metrics_pb2_grpc.MetricsCollectorServicer):    
     def CollectMetrics(self, request_iterator, context):
         metrics_count = 0
         
@@ -40,7 +38,6 @@ class MetricsCollectorServicer(metrics_pb2_grpc.MetricsCollectorServicer):
             total_metrics=metrics_count,
             status="OK"
         )
-
 def serve():
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
     metrics_pb2_grpc.add_MetricsCollectorServicer_to_server(
